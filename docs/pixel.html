@@ -8,7 +8,8 @@
 <span class="p">)</span>
 <span class="p">.</span><span class="nx">defines</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Impact.JS PixelManipulation plugin. <br />
 (c) 2012 Oscar Hinton. <br />
-Licensed under MIT.  </p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h2>Example Usage</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <pre><code>var image = new ig.Image('path');
+Licensed under MIT.  </p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h2>Example Usage</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <pre><code>var color = [100, 255, 100];
+var image = new ig.Image('path');
 var px = new PixelManipulation(image);
 var imageData = pix.getImageData();
 
@@ -17,9 +18,9 @@ var p = imageData.data;
 for (var i = 0; i &lt; p.length; i += 4) {
 
     // Multiply
-    p[i  ] = this.color.r / 255 * p[i];   // Red
-    p[i+1] = this.color.g / 255 * p[i+1]; // Green
-    [i+2] = this.color.b / 255 * p[i+2]; // Blue
+    p[i  ] = color[0] / 255 * p[i];   // Red
+    p[i+1] = color[1] / 255 * p[i+1]; // Green
+    p[i+2] = color[2] / 255 * p[i+2]; // Blue
 }
 
 pix.setImageData(imageData);
