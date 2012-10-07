@@ -1,0 +1,61 @@
+<!DOCTYPE html>  <html> <head>   <title>pixel.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               pixel.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+<span class="nx">ig</span><span class="p">.</span><span class="nx">module</span><span class="p">(</span>
+  <span class="s1">&#39;plugins.pixel&#39;</span>
+<span class="p">)</span>
+<span class="p">.</span><span class="nx">requires</span><span class="p">(</span>
+  <span class="s1">&#39;impact.image&#39;</span>
+<span class="p">)</span>
+<span class="p">.</span><span class="nx">defines</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>Impact.JS PixelManipulation plugin. <br />
+(c) 2012 Oscar Hinton. <br />
+Licensed under MIT.  </p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h2>Example Usage</h2>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <pre><code>var image = new ig.Image('path');
+var px = new PixelManipulation(image);
+var imageData = pix.getImageData();
+
+var p = imageData.data;
+
+for (var i = 0; i &lt; p.length; i += 4) {
+
+    // Multiply
+    p[i  ] = this.color.r / 255 * p[i];   // Red
+    p[i+1] = this.color.g / 255 * p[i+1]; // Green
+    [i+2] = this.color.b / 255 * p[i+2]; // Blue
+}
+
+pix.setImageData(imageData);
+image = pix.getImage();
+</code></pre>             </td>             <td class="code">               <div class="highlight"><pre><span class="nb">window</span><span class="p">.</span><span class="nx">PixelManipulation</span> <span class="o">=</span> <span class="nx">ig</span><span class="p">.</span><span class="nx">Class</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+
+  <span class="nx">canvas</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+  <span class="nx">context</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+
+  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">image</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;canvas&#39;</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">context</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+
+    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">image</span><span class="p">.</span><span class="nx">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">},</span>
+
+  <span class="nx">getImageData</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">getImageData</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+  <span class="p">},</span>
+
+  <span class="nx">setImageData</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">imageData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">putImageData</span><span class="p">(</span><span class="nx">imageData</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="p">},</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Return a new ig.Image instance with the canvas data as image.</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nx">getImage</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">ig</span><span class="p">.</span><span class="nx">nocache</span><span class="p">;</span>
+    <span class="nx">ig</span><span class="p">.</span><span class="nx">nocache</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ig</span><span class="p">.</span><span class="nx">Image</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">canvas</span><span class="p">.</span><span class="nx">toDataURL</span><span class="p">());</span>
+    <span class="nx">ig</span><span class="p">.</span><span class="nx">nocache</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="nx">image</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="p">});</span>
+
+<span class="p">});</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
